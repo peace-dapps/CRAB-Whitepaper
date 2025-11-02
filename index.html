@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naked Crab Club: Whitepaper v1.2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-top: #0C1A27;
+            --bg-bottom: #122A3E;
+            --accent: #00CFFF;
+            --heading-gradient: linear-gradient(90deg, #FF8C2B, #FFB82E);
+            --text: #F4EEDC;
+            --streak: #2C97A8;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, var(--bg-top), var(--bg-bottom));
+            color: var(--text);
+            line-height: 1.8;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(45deg, transparent 95%, var(--streak) 95%),
+                linear-gradient(-45deg, transparent 95%, var(--streak) 95%);
+            background-size: 30px 30px;
+            opacity: 0.05;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-placeholder {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: var(--accent);
+            background: rgba(0, 207, 255, 0.1);
+        }
+
+        h1 {
+            font-family: 'Bangers', cursive;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            letter-spacing: 2px;
+            background: var(--heading-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: 300;
+            margin-bottom: 30px;
+            color: var(--accent);
+        }
+
+        .header-line {
+            height: 3px;
+            width: 200px;
+            background: var(--accent);
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+
+        /* Main Content Styles */
+        .content-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-section:nth-child(2) { animation-delay: 0.2s; }
+        .content-section:nth-child(3) { animation-delay: 0.4s; }
+        .content-section:nth-child(4) { animation-delay: 0.6s; }
+
+        h2 {
+            font-family: 'Bangers', cursive;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            letter-spacing: 1px;
+            background: var(--heading-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            color: var(--accent);
+            margin: 30px 0 15px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            margin: 40px 0;
+        }
+
+        .section-number {
+            font-family: 'Bangers', cursive;
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-right: 10px;
+        }
+
+        .subsection {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Image Section */
+        .image-section {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .main-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            margin: 0 auto;
+            display: block;
+            border: 2px solid var(--accent);
+            max-height: 500px;
+            object-fit: cover;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 400px;
+            background: rgba(0, 207, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            border: 2px dashed var(--accent);
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .gallery-container {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .gallery-scroll {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            gap: 20px;
+            padding: 20px 0;
+            scrollbar-width: none; /* Firefox */
+        }
+
+        .gallery-scroll::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Edge */
+        }
+
+        .gallery-item {
+            flex: 0 0 auto;
+            width: 250px;
+            height: 180px;
+            border-radius: 8px;
+            border: 2px solid var(--accent);
+            background: rgba(0, 207, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+
+
+/* Footer */
+.footer {
+  border-radius: 20px 20px 0 0;  
+  background: rgba(12, 26, 39, 0.95);
+  text-align: center;
+  color: var(--text);
+  padding: 50px 20px 30px;
+  margin-top: 60px;
+  border-top: 3px solid var(--accent);
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  text-align: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.footer-logo-img {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+  margin: 0 auto 8px;
+  display: block;
+}
+
+.footer-logo p {
+  font-weight: 700;
+  font-size: 2rem;
+  background: var(--heading-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 10px rgba(255, 140, 43, 0.3);
+}
+
+.footer-links,
+.footer-socials {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-links a,
+.footer-socials a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  padding: 8px 16px;
+  border-radius: 6px;
+}
+
+.footer-links a:hover,
+.footer-socials a:hover {
+  color: var(--bg-top);
+  background: var(--accent);
+  transform: translateY(-2px);
+}
+
+.footer-bottom {
+  margin-top: 20px;
+  font-size: 0.85rem;
+  opacity: 0.8;
+  border-top: 1px solid rgba(0, 207, 255, 0.2);
+  padding-top: 15px;
+  color: rgba(244, 238, 220, 0.7);
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+  .footer {
+    padding: 40px 20px 20px;
+  }
+  
+  .footer-links,
+  .footer-socials {
+    gap: 12px;
+  }
+  
+  .footer-links a,
+  .footer-socials a {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+}
+
+
+
+
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 40px 20px;
+            }
+            
+            .gallery-item {
+                width: 200px;
+                height: 150px;
+            }
+            
+            .image-placeholder {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 40px 20px 30px;
+            }
+            
+            .logo-placeholder {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .gallery-item {
+                width: 160px;
+                height: 120px;
+            }
+            
+            .image-placeholder {
+                height: 200px;
+            }
+        }
+        .logo-image {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 30px;
+    border: 3px solid var(--accent);
+    border-radius: 50%;
+    display: block;
+}
+
+.gallery-item {
+    flex: 0 0 auto;
+    width: 250px;
+    height: 180px;
+    border-radius: 8px;
+    border: 2px solid var(--accent);
+    object-fit: cover;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+.main-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    margin: 0 auto;
+    display: block;
+    border: 2px solid var(--accent);
+    max-height: 500px;
+    object-fit: cover;
+}
+
+.gallery-item {
+    flex: 0 0 auto;
+    width: 250px;
+    height: 180px;
+    border-radius: 8px;
+    border: 2px solid var(--accent);
+    object-fit: cover;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+}
+
+/* Community Section */
+.community-section {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.community-title {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    color: var(--text);
+}
+
+.text-accent {
+    background: var(--heading-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.community-sub {
+    font-size: 1.2rem;
+    margin-bottom: 50px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    color: rgba(244, 238, 220, 0.8);
+}
+
+.community-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.community-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 30px;
+    background: rgba(0, 207, 255, 0.1);
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.3s ease;
+    flex: 1;
+    min-width: 200px;
+    max-width: 250px;
+}
+
+.community-card:hover {
+    background: var(--accent);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 207, 255, 0.3);
+}
+
+.community-card:hover .community-name,
+.community-card:hover .community-cta {
+    color: var(--bg-top);
+}
+
+.community-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+}
+
+.community-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+}
+
+.community-info {
+    text-align: left;
+    flex: 1;
+}
+
+.community-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: var(--text);
+    transition: color 0.3s ease;
+}
+
+.community-cta {
+    font-size: 0.9rem;
+    color: var(--accent);
+    transition: color 0.3s ease;
+}
+
+/* Responsive Community Section */
+@media (max-width: 768px) {
+    .community-section {
+        padding: 60px 20px;
+    }
+    
+    .community-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .community-card {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+           <img src="https://raw.githubusercontent.com/peace-dapps/CRABPNG/refs/heads/main/image05.png" alt="Naked Crab Club Logo" class="logo-image">
+            <h1>Naked Crab Club</h1>
+            <div class="subtitle">Whitepaper v1.2</div>
+            <div class="subtitle">The Legend Reawakens</div>
+            <div class="header-line"></div>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <main>
+        <section class="content-section">
+            <h2>Executive Summary</h2>
+            <p>The meme token landscape is saturated with projects lacking substance and longevity. <span class="highlight">Naked Crab Club ($CRAB)</span> stands apart. We are resurrecting a verified piece of internet history—the original "Naked Crab Man" from Matt Furie's iconic universe—and building a sustainable ecosystem around it on Solana.</p>
+            <p>$CRAB is not a speculative gamble; it is a structured, community-centric project with a clear path to revenue generation and value appreciation. Our model is engineered for long-term growth, backed by transparent tokenomics, strategic buybacks, and a locked team commitment that ensures alignment with our community.</p>
+        </section>
+
+        <hr>
+
+        <section class="content-section">
+            <h2><span class="section-number">1.</span> Mission & Vision</h2>
+            
+            <h3>Our Mission</h3>
+            <p>To fuse authentic meme culture with tangible utility, creating a self-sustaining digital economy on Solana. We are building a transparent, engaged community that is directly rewarded through a ecosystem of entertainment, commerce, and governance.</p>
+            
+            <h3>Our Vision</h3>
+            <p>To establish $CRAB as a benchmark for what a modern meme token can achieve: a culturally-significant asset with a robust, revenue-generating foundation that delivers lasting value to its holders.</p>
+        </section>
+
+        <section class="content-section">
+            <h2><span class="section-number">2.</span> Core Principles: The Foundation of Trust</h2>
+            <ul>
+                <li><span class="highlight">Radical Transparency & Fairness:</span> We launch with 100% fairness—no presale, no hidden team allocations. Liquidity is permanently locked at launch. Furthermore, the team's commitment is cemented through a verifiable buyback and lock mechanism, where a portion of treasury funds are used to purchase tokens from the open market, which are then locked to demonstrate our long-term faith in the project.</li>
+                <li><span class="highlight">Community as Sovereign:</span> This is your club. Major decisions regarding partnerships, treasury use, and development roadmaps will be governed by the community, with a clear evolutionary path to a fully-fledged DAO.</li>
+                <li><span class="highlight">Built on Legacy, Engineered for the Future:</span> Our foundation is the culturally-rich and historically significant "Naked Crab Man." We honor this legacy while building a forward-thinking ecosystem designed for scalability and adoption.</li>
+                <li><span class="highlight">Sustainable Value Over Speculative Hype:</span> We reject short-term pumps. Our entire model is designed to create and recycle value back into the token and its holders through deflationary mechanisms and real-world utility.</li>
+            </ul>
+        </section>
+
+        <hr>
+
+        <section class="content-section">
+            <h2><span class="section-number">3.</span> The $CRAB Token: Engine of the Ecosystem</h2>
+            <ul>
+                <li><span class="highlight">Network:</span> Solana (Chosen for high throughput, low fees, and a vibrant ecosystem)</li>
+                <li><span class="highlight">Launch Platform:</span> Pump.fun</li>
+                <li><span class="highlight">Total Supply:</span> To be announced prior to launch.</li>
+                <li><span class="highlight">Launch Philosophy:</span> A 100% fair launch ensures a democratic and community-owned inception, fostering unshakeable early trust.</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h2><span class="section-number">4.</span> The $CRAB Ecosystem: A Blueprint for Utility</h2>
+            <p>The $CRAB token is the central currency powering a multi-faceted ecosystem designed to create constant demand and inherent value.</p>
+            
+            <ul>
+                <li><span class="highlight">The Naked Casino:</span> A proprietary, web-based gaming hub where $CRAB is the exclusive currency. A significant percentage of house revenue is automatically allocated to:
+                    <div class="subsection">
+                        <ul>
+                            <li><span class="highlight">Strategic Buybacks & Burns:</span> Systematic purchases of $CRAB from the open market to increase scarcity and support price stability, with a portion permanently removed from circulation.</li>
+                            <li><span class="highlight">The Community Vault:</span> Funds the treasury for staking rewards, community grants, and strategic initiatives.</li>
+                        </ul>
+                    </div>
+                </li>
+                <li><span class="highlight">The Crab Marketplace:</span> A dedicated platform for exclusive digital and physical merchandise, limited-edition NFTs, and collectibles. All transactions are conducted in $CRAB, creating organic, continuous demand for the token.</li>
+                <li><span class="highlight">Community Vault & Staking Rewards:</span> Holders can stake their $CRAB to earn passive yield, funded by the ecosystem's revenue streams. This incentivizes long-term holding and directly rewards community faith.</li>
+                <li><span class="highlight">Governance & DAO Transition:</span> $CRAB will evolve into a governance token, granting holders direct voting power over treasury management, project direction, and partnership approvals.</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h2><span class="section-number">5.</span> Strategic Roadmap: A Clear Path to Dominance</h2>
+            
+            <h3>Phase 1: The Awakening (Launch – Month 1)</h3>
+            <ul>
+                <li>Fair Launch of $CRAB on Pump.fun.</li>
+                <li>Permanent Lock of Initial Liquidity.</li>
+                <li>Official Website and Social Channels Launch.</li>
+                <li>Initiation of Community Growth Initiatives.</li>
+            </ul>
+            
+            <h3>Phase 2: The Gathering (Months 1–3)</h3>
+            <ul>
+                <li>Aggressive Meme Campaigns and Social Media Expansion.</li>
+                <li>Strategic Partnership Outreach.</li>
+                <li>Commence Development of Naked Casino & Marketplace.</li>
+                <li>Activation of the Team Buyback & Lock Mechanism: Public, verifiable buys and locks to align team incentives with community success.</li>
+            </ul>
+            
+            <h3>Phase 3: Dominion (Months 3–6)</h3>
+            <ul>
+                <li>Public Beta Launch of The Naked Casino.</li>
+                <li>First Exclusive NFT Collection Drop.</li>
+                <li>Launch of Physical Merchandise Pre-orders.</li>
+                <li>Activation of the Staking Rewards Program.</li>
+            </ul>
+            
+            <h3>Phase 4: Expansion (Months 6+)</h3>
+            <ul>
+                <li>Full-Scale Launch of The Crab Marketplace.</li>
+                <li>Proposal and Rollout of DAO Governance Framework.</li>
+                <li>Strategic Brand Collaborations and Licensing Deals.</li>
+                <li>Campaign for Major Centralized Exchange (CEX) Listings.</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h2><span class="section-number">6.</span> Sustainable Economic Model</h2>
+            <p>Our longevity is secured by a multi-pronged revenue model designed to create a virtuous cycle of value:</p>
+            
+            <ol>
+                <li><span class="highlight">Casino Revenue Share:</span> A percentage of all gaming profits fund automated buybacks, burns, and the Community Vault.</li>
+                <li><span class="highlight">Marketplace & Merchandising:</span> Profits from all sales are reinvested into ecosystem development, liquidity, and staking pools.</li>
+                <li><span class="highlight">Strategic IP Licensing:</span> Leveraging the iconic Naked Crab IP for brand collaborations, generating revenue and mainstream exposure.</li>
+                <li><span class="highlight">Deflationary Tokenomics:</span> Continuous buybacks and burns create increasing scarcity, directly benefiting all holders by enhancing the value of each token.</li>
+            </ol>
+        </section>
+
+        <section class="content-section">
+            <h2><span class="section-number">7.</span> The Unfair Advantage: A Verified Cultural Artifact</h2>
+            <p>In a sea of derivative projects, $CRAB possesses a foundational advantage: it is rooted in a legitimate, iconic piece of art from Matt Furie's universe. This provides an immediate narrative depth, cultural credibility, and a powerful marketing hook that generic animal memes cannot replicate. Our brand isn't manufactured; it's rediscovered.</p>
+        </section>
+
+        <section class="content-section">
+            <h2><span class="section-number">8.</span> Conclusion: The Investment Thesis for $CRAB</h2>
+            <p>Naked Crab Club represents a compelling convergence of factors rarely found in the meme token space:</p>
+            
+            <ul>
+                <li><span class="highlight">Cultural Authenticity:</span> A verified origin story with built-in nostalgia and appeal.</li>
+                <li><span class="highlight">Investor-Aligned Structure:</span> A fair launch, locked liquidity, and a team buyback/lock mechanism that proves we are invested alongside you.</li>
+                <li><span class="highlight">Tangible, Phased Utility:</span> A clear roadmap of revenue-generating platforms that create organic demand for the token.</li>
+                <li><span class="highlight">Community Empowerment:</span> A clear path to governance, placing the project's future in the hands of its holders.</li>
+            </ul>
+            
+            <p>We are not just launching a token; we are activating a legend and building a sustainable, community-owned empire. The table is set for those who recognize the difference between hype and substance.</p>
+            
+            <p style="text-align: center; font-size: 1.2rem; margin-top: 30px; color: var(--accent);">
+                <strong>Join the Shellless. The Legend is Back. $CRAB</strong>
+            </p>
+        </section>
+
+<!-- Image Section -->
+<section class="image-section">
+    <div class="container">
+        <img src="https://raw.githubusercontent.com/peace-dapps/CRABPNG/refs/heads/main/20251101_143917.jpg" alt="Naked Crab Club" class="main-image">
+    </div>
+</section>
+
+<!-- Gallery Section -->
+<section class="gallery-section">
+    <div class="container">
+        <h2>Gallery</h2>
+        <div class="gallery-container">
+            <div class="gallery-scroll">
+                <img src="https://raw.githubusercontent.com/peace-dapps/CRABPNG/refs/heads/main/20251101_183837.jpg" alt="Gallery Image 1" class="gallery-item">
+                <img src="https://raw.githubusercontent.com/peace-dapps/CRABPNG/refs/heads/main/20251102_001755.jpg" alt="Gallery Image 2" class="gallery-item">
+                <img src="https://raw.githubusercontent.com/peace-dapps/CRABPNG/refs/heads/main/20251102_154721.jpg" alt="Gallery Image 3" class="gallery-item">
+                <img src="https://raw.githubusercontent.com/peace-dapps/CRABPNG/refs/heads/main/20251102_154729.jpg" alt="Gallery Image 4" class="gallery-item">
+                <img src="https://raw.githubusercontent.com/peace-dapps/CRABPNG/refs/heads/main/20251102_154827.jpg" alt="Gallery Image 5" class="gallery-item">
+            </div>
+        </div>
+    </div>
+</section>
+    </main>
+    
+    <!-- Community Section -->
+<section id="community" class="community-section">
+  <div class="container">
+    <h2 class="community-title">Join the <span class="text-accent">Shellless</span></h2>
+    <p class="community-sub">Be part of the legendary <strong>Naked Crab Club</strong> — help build the future of meme culture on Solana.</p>
+
+    <div class="community-grid">
+      <!-- Telegram -->
+      <a class="community-card" href="https://t.me/THENAKEDCRABMAN" target="_blank" rel="noopener noreferrer">
+        <div class="community-icon" aria-hidden="true">
+          <!-- Telegram SVG -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M320 72C183 72 72 183 72 320C72 457 183 568 320 568C457 568 568 457 568 320C568 183 457 72 320 72zM435 240.7C431.3 279.9 415.1 375.1 406.9 419C403.4 437.6 396.6 443.8 390 444.4C375.6 445.7 364.7 434.9 350.7 425.7C328.9 411.4 316.5 402.5 295.4 388.5C270.9 372.4 286.8 363.5 300.7 349C304.4 345.2 367.8 287.5 369 282.3C369.2 281.6 369.3 279.2 367.8 277.9C366.3 276.6 364.2 277.1 362.7 277.4C360.5 277.9 325.6 300.9 258.1 346.5C248.2 353.3 239.2 356.6 231.2 356.4C222.3 356.2 205.3 351.4 192.6 347.3C177.1 342.3 164.7 339.6 165.8 331C166.4 326.5 172.5 322 184.2 317.3C256.5 285.8 304.7 265 328.8 255C397.7 226.4 412 221.4 421.3 221.2C423.4 221.2 427.9 221.7 430.9 224.1C432.9 225.8 434.1 228.2 434.4 230.8C434.9 234 435 237.3 434.8 240.6z"/></svg>
+        </div>
+        <div class="community-info">
+          <div class="community-name">Telegram</div>
+          <div class="community-cta">Join Chat</div>
+        </div>
+      </a>
+
+      <!-- X (Twitter) -->
+      <a class="community-card" href="https://x.com/THENAKEDCRABMAN" target="_blank" rel="noopener noreferrer">
+        <div class="community-icon" aria-hidden="true">
+          <!-- X SVG -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M453.2 112L523.8 112L369.6 288.2L551 528L409 528L297.7 382.6L170.5 528L99.8 528L264.7 339.5L90.8 112L236.4 112L336.9 244.9L453.2 112zM428.4 485.8L467.5 485.8L215.1 152L173.1 152L428.4 485.8z"/></svg>
+        </div>
+        <div class="community-info">
+          <div class="community-name">X (Twitter)</div>
+          <div class="community-cta">Follow</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container footer-container">
+    <div class="footer-logo">
+      <img src="https://raw.githubusercontent.com/peace-dapps/CRABPNG/refs/heads/main/image05.png" alt="Naked Crab Club Logo" class="footer-logo-img">
+      <p>The Legend Reawakens</p>
+    </div>
+
+    <div class="footer-links">
+      <a href="https://nakedcrabclub.com/#intro">Home</a>
+      <a href="#">Whitepaper</a>
+      <a href="https://roadmap.nakedcrabclub.com">Roadmap</a>
+    </div>
+
+    <div class="footer-socials">
+      <a href="https://x.com/THENAKEDCRABMAN" target="_blank">X</a>
+      <a href="https://t.me/THENAKEDCRABMAN" target="_blank">Telegram</a>
+      <a href="https://www.tiktok.com/@crabfurie_?_t=ZP-90fbuguQscZ&_r=1" target="_blank">TikTok</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 Naked Crab Club. All Rights Reserved. Built on Solana.</p>
+  </div>
+</footer>
+    <script>
+        // Simple fade-in animation for sections
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.content-section');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            sections.forEach(section => {
+                section.style.animationPlayState = 'paused';
+                observer.observe(section);
+            });
+        });
+        
+    // Gallery image click to popup
+    document.querySelectorAll('.gallery-item').forEach(item => {
+        item.addEventListener('click', function() {
+            // Create modal overlay
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.9);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1000;
+                cursor: pointer;
+            `;
+            
+            // Create enlarged image
+            const enlargedImg = document.createElement('img');
+            enlargedImg.src = this.src;
+            enlargedImg.alt = this.alt;
+            enlargedImg.style.cssText = `
+                max-width: 90%;
+                max-height: 90%;
+                object-fit: contain;
+                border-radius: 8px;
+                border: 2px solid var(--accent);
+            `;
+            
+            // Close on click
+            modal.addEventListener('click', function() {
+                document.body.removeChild(modal);
+            });
+            
+            modal.appendChild(enlargedImg);
+            document.body.appendChild(modal);
+        });
+    });
+    </script>
+</body>
+</html>
